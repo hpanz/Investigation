@@ -1,0 +1,24 @@
+<script>
+    function callDockerComposeMethodInBackeEnd(myFlag) {
+        const url = "${urlFactory.baseHREF}netmarkets/jsp/com/wincomplm/wex/delivery/files/edkDockerCaller.jsp";
+        if (myFlag !== undefined && myFlag !== null) {
+            const body = new URLSearchParams(
+                    {
+                        action: myFlag
+                    }
+            );
+
+            let promise =
+                    fetch(url, {'method': 'POST', 'body': body})
+                    .then(response => response.json())
+                    .then((json) => {
+                        if (json) {
+                            return json.text;
+                        } else {
+                        }
+
+                    }).catch(error => console.error('Error:', error));
+            return promise;
+        }
+    }
+</script>

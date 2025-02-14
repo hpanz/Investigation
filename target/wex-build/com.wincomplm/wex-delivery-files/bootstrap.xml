@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bootstrap>
+    <uid>com.wincomplm.wex-delivery-files</uid>
+    <service>com.wincomplm.wex.delivery.files.impl.bootstrap.WexBootstrap</service>
+    <classpath>
+        <element>codebase/commons-io-2.15.0.jar</element>
+        <element>codebase/activation-1.1.1.jar</element>
+        <element>codebase/wex-delivery-files.jar</element>
+        <element>codebase/wt-framework-commons-1.16-13.1.jar</element>
+    </classpath>
+    <required>
+        <uid>com.wincomplm.wex-system</uid>
+    </required>
+</bootstrap>
