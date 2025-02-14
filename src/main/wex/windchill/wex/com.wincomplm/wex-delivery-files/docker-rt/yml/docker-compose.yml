@@ -7,7 +7,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - C:\Users\HaoPan\.m2:/root/.m2
       - coder-data:/home/coder 
     environment:
       - PASSWORD=Wincom2025!
