@@ -25,13 +25,10 @@
     </actions>
     <install>
         <menus>
-            <extension menu="header actions" file="navigation-actionModels" action="edkDeliveryNonPop"/>
+<!--            <extension menu="header actions" file="navigation-actionModels" action="edkDeliveryNonPop"/>-->
             <extension menu="header actions" file="navigation-actionModels" action="dockerCommandCalls"/>
         </menus>
         <actions>
-            <page name="edkUnzip"   url="edkUnzip.jsp"/>
-            <page name="edkDockerCheck"   url="edkDockerCheck.jsp"/>
-            <page name="edkDeliveryNonPop"   url="edkDockerCaller.jsp"/>
             <page name="dockerCommandCalls"  url="dockerCaller.jsp"/>
         </actions>
         

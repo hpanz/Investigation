@@ -24,16 +24,9 @@ import wt.util.resource.WTListResourceBundle;
 public class WexResources extends WTListResourceBundle {
 
     @RBEntry("Delivery Files")
-    public static final String PRIVATE_CONSTANT_0 = "com.wincomplm.wex.delivery.files.edkDeliveryNonPop.description";
+    public static final String PRIVATE_CONSTANT_0 = "com.wincomplm.wex.delivery.files.dockerCommandCalls.description";
     @RBEntry("Delivery Files")
-    public static final String PRIVATE_CONSTANT_1 = "com.wincomplm.wex.delivery.files.edkDeliveryNonPop.tooltip";
+    public static final String PRIVATE_CONSTANT_1 = "com.wincomplm.wex.delivery.files.dockerCommandCalls.tooltip";
     @RBEntry("Delivery Files")
-    public static final String PRIVATE_CONSTANT_2 = "com.wincomplm.wex.delivery.files.edkDeliveryNonPop.activetooltip";
-
-    @RBEntry("Delivery Files2")
-    public static final String PRIVATE_CONSTANT_3 = "com.wincomplm.wex.delivery.files.dockerCommandCalls.description";
-    @RBEntry("Delivery Files2")
-    public static final String PRIVATE_CONSTANT_4 = "com.wincomplm.wex.delivery.files.dockerCommandCalls.tooltip";
-    @RBEntry("Delivery Files2")
-    public static final String PRIVATE_CONSTANT_5 = "com.wincomplm.wex.delivery.files.dockerCommandCalls.activetooltip";
+    public static final String PRIVATE_CONSTANT_2 = "com.wincomplm.wex.delivery.files.dockerCommandCalls.activetooltip";
 }
