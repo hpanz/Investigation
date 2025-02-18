@@ -1,5 +1,5 @@
-# Use the official code-server image
-FROM codercom/code-server:latest
+#Use wex solutions image as base
+FROM docker.wex.solutions/codercom/code-server:latest
 
 # Switch to root user to install packages
 USER root

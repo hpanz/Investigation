@@ -1,7 +1,7 @@
 <html>
     <body>
-        <h1>Hello From My Docker Caller Servlet</h1>
-        <textarea id="result-area" style="resize: both;"></textarea>
+        <h1>Server Response</h1>
+        <textarea id="result-area" style="resize: both; width: 500px; height: 200px;"></textarea>
 
         <div>
             <h3>Send docker compose flag (Up or Down) </h3>
@@ -34,7 +34,7 @@
                             if (data.data.received === "up") {
                                 setTimeout(() => {
                                     myWindow = window.open(urlLocal);
-                                }, 5000); // 5-second delay to allow Docker services to start
+                                }, 5000); 
                                 txtArea.value = "Starting containers...";
                             }
                         }

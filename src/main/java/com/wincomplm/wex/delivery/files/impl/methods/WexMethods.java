@@ -27,6 +27,8 @@ import wt.httpgw.URLFactory;
 @WexComponent(uid = "methods", description = "Invokable methods")
 public class WexMethods {
 
+    public static boolean first_build = true;
+
     private class HttpServletRequestUtils {
 
         private final ObjectMapper objectMapper = new ObjectMapper();
@@ -90,15 +92,21 @@ public class WexMethods {
                 result.put("received", action);
                 String command = action;
                 if (command.equalsIgnoreCase("up")) {
-                    if(HelperMethods.isDockerInstalled()){
-                        int buildExitCode = HelperMethods.executeDockerCompose("build", "--no-cache");
-                        if (buildExitCode != 0) {
-                            // If the build fails, return an error message
-                            result.put("error", "Docker build failed. Exit code: " + buildExitCode);
-                            jsonResponse = respUtil.getJSONResponseFromMap(result);
-                            return respUtil.writeJsonResponse(response, jsonResponse);
+                    if (HelperMethods.isDockerInstalled() && HelperMethods.isDockerRunning()) {
+                        if (first_build) {
+                            int buildExitCode = HelperMethods.executeDockerCompose("build", "--no-cache");
+                            if (buildExitCode != 0) {
+                                // If the build fails, return an error message
+                                result.put("error", "Docker build failed. Exit code: " + buildExitCode);
+                                jsonResponse = respUtil.getJSONResponseFromMap(result);
+                                return respUtil.writeJsonResponse(response, jsonResponse);
+                            }
+                            first_build = false;
                         }
                         myExitCode = HelperMethods.executeDockerCompose(command, "-d");
+                    }
+                    else{
+                        result.put("error", "Please install docker and run it");
                     }
                 } else {//assuming "down"
                     myExitCode = HelperMethods.executeDockerCompose(command);

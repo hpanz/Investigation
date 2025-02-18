@@ -33,6 +33,28 @@ public class HelperMethods {
             return false;
         }
     }
+    
+    public static boolean isDockerRunning() throws Exception {
+        Process process = Runtime.getRuntime().exec("docker info");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        boolean isRunning = false;
+
+        while ((line = reader.readLine()) != null) {
+            if (line.contains("Server Version")) { // Ensures the daemon is responding
+                isRunning = true;
+                break;
+            }
+        }
+
+        if (isRunning) {
+            System.out.println("Docker daemon is running.");
+        } else {
+            System.out.println("Docker daemon is NOT running.");
+        }
+
+        return isRunning;
+    }
 
     public static int executeDockerCompose(String... commands) throws Exception {
         ProcessBuilder processBuilder = new ProcessBuilder();

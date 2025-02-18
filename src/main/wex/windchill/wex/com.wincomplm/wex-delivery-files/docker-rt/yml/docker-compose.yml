@@ -2,10 +2,9 @@
 services:
   coder-server:
     build: .
-    image: codercom/code-server:latest
     container_name: coder-server
     ports:
-      - "8080:8080"
+      - "8080:8080"  
     volumes:
       - coder-data:/home/coder 
     environment:
