@@ -18,12 +18,28 @@ import com.wincomplm.wex.wt.framework.commons.system.WTConstants;
  * @author HaoPan hpan@wincom-plm.com
  */
 public class HelperMethods {
-    
+
+    public static String getAssignedPort(String containerName, String internalPort) throws Exception {
+        String assignedPort = internalPort;
+
+        Process process = Runtime.getRuntime().exec("docker port " + containerName + " " + internalPort);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line = reader.readLine();
+        while (line != null) {
+            String[] parts = line.split(":");
+            if (parts.length > 1) {
+                assignedPort = parts[1].trim();
+                line = null;
+            }
+        }
+        return assignedPort;
+    }
+
     public static boolean isDockerInstalled() throws Exception {
         Process process = Runtime.getRuntime().exec("docker --version");
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line = reader.readLine();
-        
+
         if (line != null) {
             System.out.println("Docker Version: " + line);
             System.out.println("Docker is installed.");
@@ -33,7 +49,7 @@ public class HelperMethods {
             return false;
         }
     }
-    
+
     public static boolean isDockerRunning() throws Exception {
         Process process = Runtime.getRuntime().exec("docker info");
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -65,7 +81,7 @@ public class HelperMethods {
         for (String command : commands) {
             processBuilder.command().add(command);
         }
-      //  processBuilder.command().addAll(Arrays.asList(commands));
+        //  processBuilder.command().addAll(Arrays.asList(commands));
 
         // Set the working directory to the location of docker-compose.yml
         processBuilder.directory(new File(WTConstants.WTHOME + "/wex/packages/com.wincomplm/wex-delivery-files/windchill/wex/com.wincomplm/wex-delivery-files/docker-rt/yml"));

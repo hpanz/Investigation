@@ -1,0 +1,87 @@
+.body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.h1 {
+    color: #333;
+    text-align: center;
+}
+
+.textarea {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: 200px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.h3 {
+    color: #555;
+}
+
+.dockerUp {
+    background-color: #359f2c;
+    border: 1px solid #ddd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dockerUp:hover {
+    background-color: #444;
+}
+
+.dockerUp:active {
+    background-color: #004080;
+}
+
+.dockerDown {
+    background-color: #359f2c;
+    border: 1px solid #ddd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dockerDown:hover {
+    background-color: #444;
+}
+
+.dockerDown:active {
+    background-color: #004080;
+}
+
+.browser {
+    background-color: #359f2c;
+    border: 1px solid #ddd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.browser:hover {
+    background-color: #444;
+}
+
+.browser:active {
+    background-color: #004080;
+}

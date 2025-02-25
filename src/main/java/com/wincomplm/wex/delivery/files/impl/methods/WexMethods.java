@@ -84,12 +84,14 @@ public class WexMethods {
         JSONObject jsonBody = new JSONObject(requestBody);
         JSONObject jsonResponse = new JSONObject();
         String action = null;
+        String assignedPort = null;
         Map<String, Object> result = new HashMap();
+        Map<String, Object> data = new HashMap();
         if (jsonBody.has("action")) {
             action = jsonBody.getString("action");
             try {
                 int myExitCode = 0;
-                result.put("received", action);
+                data.put("received", action);
                 String command = action;
                 if (command.equalsIgnoreCase("up")) {
                     if (HelperMethods.isDockerInstalled() && HelperMethods.isDockerRunning()) {
@@ -104,20 +106,25 @@ public class WexMethods {
                             first_build = false;
                         }
                         myExitCode = HelperMethods.executeDockerCompose(command, "-d");
-                    }
-                    else{
-                        result.put("error", "Please install docker and run it");
+                        assignedPort = HelperMethods.getAssignedPort("coder-server", "8080");
+                        data.put("assignedPort", assignedPort);
+                    } else {
+                        System.out.println("Not running or not installed");
+                        data.put("error", "Please install docker and run it");
                     }
                 } else {//assuming "down"
                     myExitCode = HelperMethods.executeDockerCompose(command);
                 }
                 if (command.equalsIgnoreCase("up") && myExitCode == 0) {
                     String url = new URLFactory().getBaseURL().getHost();
-                    result.put("nextAction", "Navigate to URL: " + url + "/ default port is 8080");
+                    String port = (assignedPort == null) ?"8080":assignedPort;
+                    String urlNPort =  url+ ":" +port+"/";
+                    data.put("nextAction", "Navigate to URL: " +urlNPort);
                 } else if (command.equalsIgnoreCase("down") && myExitCode == 0) {
-                    result.put("nextAction", "Go Home Already its late stop working (Docker is down successfully)");
+                    data.put("nextAction", "Docker is down successfully");
                 }
-                result.put("comandExitCode", myExitCode);
+                data.put("comandExitCode", myExitCode);
+                result.putAll(data);
                 jsonResponse = respUtil.getJSONResponseFromMap(result);
             } catch (Exception e) {
                 jsonResponse.append("Exception: ", e.getMessage());

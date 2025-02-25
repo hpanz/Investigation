@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    let assignedPort = "";
+    let urlLocal = "localhost"
+    function openLocalhost() {
+        if (!assignedPort) {
+            alert("Port not avaible, please start docker");
+            return;
+        }
+        urlLocal = window.location.protocol + '//' + window.location.hostname + ':' + assignedPort;
+        window.open(urlLocal);
+    }
+    function areEqual(str1, str2) {
+        return str1.toUpperCase() === str2.toUpperCase();
+    }
+    function callDockerCaller(action) {
+        console.log("click");
+        const txtArea = document.getElementById("result-area");
+        var url = "${urlFactory.baseHREF}netmarkets/jsp/com/wincomplm/wex/delivery/files/runDockerCall.jsp";
+        var myWindow;
+        var body = {
+            action: action
+        };
+
+        txtArea.value = "Processing...";
+        txtArea.value += "\nStarting containers...";
+
+
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify(body)
+        })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    txtArea.value = JSON.stringify(data, null, 4);
+                    if (data.data.assignedPort) {
+                        assignedPort = data.data.assignedPort;
+                        document.getElementById("brwButton").onclick = function () {
+                            window.open(window.location.protocol + '//' + window.location.hostname + ':' + assignedPort);
+                        };
+                    }
+                    if (areEqual(action, "up")) {
+                        console.log("show port ", data.data.assignedPort);
+                        setTimeout(() => {
+                            myWindow = window.open(urlLocal);
+                        }, 5000);
+                        txtArea.value += "\n Started containers... at port: " + data.data.assignedPort;
+                    }
+
+                })
+                .catch(error => {
+                    console.error("Error:", error)
+                    txtArea.value = "Error: " + error.message;
+                });
+    }
+
+</script>
